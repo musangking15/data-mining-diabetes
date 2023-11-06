@@ -7,22 +7,14 @@ diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
 # judul web
 st.title('Data Mining Prediksi Diabetes')
 
-
 Pregnancies = st.text_input('input nilai Pregnancies')
-
 Glucose = st.text_input('input nilai Glucose')
-
 BloodPressure = st.text_input('input nilai Blood Pressure')
-
 SkinThickness = st.text_input('input nilai Skin Thickness')
-
 Insulin = st.text_input('input nilai Insulin')
-
 BMI = st.text_input('input nilai BMI')
-
 DiabetesPedigreeFunction = st.text_input(
     'input nilai Diabetes Pedigree Function')
-
 Age = st.text_input('input nilai Age')
 
 # code untuk prediksi
@@ -33,8 +25,8 @@ if st.button('Test Prediksi Diabetes'):
     diab_prediction = diabetes_model.predict(
         [[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
 
-    if diab_prediction == 1:
-        diab_diagnosis = 'Pasien terkena Diabetes'
+    if diab_prediction[0] == 0:
+        diab_diagnosis = 'Pasien tidak terkena diabetes'
     else:
-        diab_diagnosis = 'Pasien tidak terkena Diabetes'
-    st.success(diab_diagnosis)
+        diab_diagnosis = 'Pasien terkena diabetes'
+        st.success(diab_diagnosis)
